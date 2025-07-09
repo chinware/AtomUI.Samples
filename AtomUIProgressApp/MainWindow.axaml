@@ -11,14 +11,15 @@
              WindowStartupLocation="CenterScreen">
     <Panel>
         <StackPanel Orientation="Vertical" Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Source="/Assets/atomui-oss.png" Width="300" Margin="0 0 0 40"/>
             <atom:ProgressBar Value="{Binding ProgressValue}" Minimum="0" Maximum="100" 
                               HorizontalAlignment="Center"
                               Width="400"/>
             <atom:CircleProgress Value="{Binding ProgressValue}" Minimum="0" Maximum="100"
                                  HorizontalAlignment="Center"/>
             <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
-                <atom:Button SizeType="Small" Click="HandleSubBtnClicked">Sub</atom:Button>
-                <atom:Button SizeType="Small" Click="HandleAddBtnClicked">Add</atom:Button>
+                <atom:Button Click="HandleSubBtnClicked">Sub</atom:Button>
+                <atom:Button Click="HandleAddBtnClicked">Add</atom:Button>
             </StackPanel>
         </StackPanel>
     </Panel>

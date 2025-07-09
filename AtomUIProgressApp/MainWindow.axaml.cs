@@ -1,4 +1,3 @@
-
 using System;
 using AtomUI.Controls;
 using Avalonia;
