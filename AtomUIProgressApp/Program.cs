@@ -2,7 +2,9 @@
 using System;
 using System.Globalization;
 using AtomUI.Controls;
+using AtomUI.Fonts.AlibabaSans;
 using AtomUI.Theme;
+using AtomUI.Theme.Language;
 using AtomUI.Utils;
 
 namespace AtomUIProgressApp;
@@ -19,17 +21,16 @@ class Program
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
     {
-        var builder = AppBuilder.Configure<App>()
+        return AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .WithInterFont()
+            .WithAlibabaSansFont()
             .With(new Win32PlatformOptions())
+            .UseAtomUI(builder =>
+            {
+                builder.WithDefaultLanguageVariant(LanguageVariant.zh_CN);
+                builder.WithDefaultTheme(IThemeManager.DEFAULT_THEME_ID);
+                builder.UseOSSControls();
+            })
             .LogToTrace();
-        
-        var themeBuilder = builder.CreateThemeManagerBuilder();
-        themeBuilder.UseCultureInfo(new CultureInfo(LanguageCode.en_US));
-        themeBuilder.UseTheme(ThemeManager.DEFAULT_THEME_ID);
-        themeBuilder.UseOSSControls();
-        
-        return builder.UseAtomUI(themeBuilder);
     }
 }

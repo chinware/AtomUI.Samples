@@ -5,7 +5,7 @@ using Avalonia.Markup.Xaml;
 
 namespace AtomUIProgressApp;
 
-public partial class App : Application
+public partial class App : AtomApplication
 {
     public override void Initialize()
     {
