@@ -1,11 +1,10 @@
-
-using AtomUI;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 
 namespace AtomUIProgressApp;
 
-public partial class App : AtomApplication
+public partial class App : Application
 {
     public override void Initialize()
     {
