@@ -25,12 +25,6 @@ class Program
             .UsePlatformDetect()
             .WithAlibabaSansFont()
             .With(new Win32PlatformOptions())
-            .UseAtomUI(builder =>
-            {
-                builder.WithDefaultLanguageVariant(LanguageVariant.zh_CN);
-                builder.WithDefaultTheme(IThemeManager.DEFAULT_THEME_ID);
-                builder.UseOSSControls();
-            })
             .LogToTrace();
     }
 }
