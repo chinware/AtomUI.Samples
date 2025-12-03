@@ -1,6 +1,9 @@
 <atom:Window xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:atom="https://atomui.net"
+             xmlns:material="https://atomui.net/icons/material"
+             xmlns:iconpark="https://atomui.net/icons/iconpark"
+             xmlns:antdesign="https://atomui.net/icons/antdesign"
              xmlns:local="using:AtomUIProgressApp"
              x:Class="AtomUIProgressApp.MainWindow"
              Title="AtomUIProgressApp"
@@ -21,6 +24,14 @@
                 <atom:Button Click="HandleSubBtnClicked">Sub</atom:Button>
                 <atom:Button Click="HandleAddBtnClicked">Add</atom:Button>
             </StackPanel>
+            
+            <atom:GroupBox HeaderTitle="Icons" HorizontalAlignment="Center" Padding="20">
+                <StackPanel Spacing="10" Orientation="Horizontal">
+                    <antdesign:WechatFilled Width="32" Height="32"/>
+                    <material:DeviceBluetoothSearchingFilled Width="32" Height="32"/>
+                    <iconpark:Cpu IconTheme="Filled" Width="32" Height="32"/>
+                </StackPanel>
+            </atom:GroupBox>
         </StackPanel>
     </Panel>
 </atom:Window>
