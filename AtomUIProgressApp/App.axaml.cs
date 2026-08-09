@@ -1,3 +1,4 @@
+using System.Globalization;
 using AtomUI;
 using AtomUI.Desktop.Controls;
 using AtomUI.Localization;
@@ -15,8 +16,11 @@ public partial class App : Application
         AvaloniaXamlLoader.Load(this);
         this.UseAtomUI(builder =>
         {
-            builder.UseLanguages(LanguageTags.ZhCN, [LanguageTags.ZhCN]);
+            builder.UseLanguages(
+                SampleLanguageDefaults.Resolve(CultureInfo.CurrentUICulture),
+                [LanguageTags.EnUS, LanguageTags.ZhCN, LanguageTags.ZhTW, LanguageTags.PtBR]);
             builder.WithInitialTheme(IThemeManager.DEFAULT_THEME_ID);
+            builder.UseSampleThemes();
             builder.UseAlibabaSansFont();
             builder.UseDesktopControls();
         });

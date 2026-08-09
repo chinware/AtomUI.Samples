@@ -6,32 +6,194 @@
              xmlns:antdesign="https://atomui.net/icons/antdesign"
              xmlns:local="using:AtomUIProgressApp"
              x:Class="AtomUIProgressApp.MainWindow"
-             Title="AtomUIProgressApp"
-             Width="800"
-             Height="600"
-             x:DataType="local:MainWindow"
+             Title="{Binding WindowTitle}"
+             Width="920"
+             Height="640"
+             MinWidth="760"
+             MinHeight="560"
+             x:DataType="local:MainWindowViewModel"
              WindowState="Normal"
              WindowStartupLocation="CenterScreen">
-    <Panel>
-        <StackPanel Orientation="Vertical" Spacing="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Image Source="/Assets/atomui-oss.png" Width="300" Margin="0 0 0 40"/>
-            <atom:ProgressBar Value="{Binding ProgressValue}" Minimum="0" Maximum="100" 
-                              HorizontalAlignment="Center"
-                              Width="400"/>
-            <atom:CircleProgress Value="{Binding ProgressValue}" Minimum="0" Maximum="100"
-                                 HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
-                <atom:Button Click="HandleSubBtnClicked">Sub</atom:Button>
-                <atom:Button Click="HandleAddBtnClicked">Add</atom:Button>
+    <atom:Window.LeftAddOn>
+        <atom:Menu FontWeight="Normal">
+            <atom:MenuItem Header="{Binding ThemeLabel}"
+                           Icon="{antdesign:AntDesignIconProvider Kind=BulbOutlined}">
+                <atom:MenuItem Header="Daybreak Blue"
+                               ToggleType="Radio"
+                               GroupName="ThemeColor"
+                               IsChecked="{Binding IsDaybreakBlueTheme, Mode=OneWay}"
+                               Tag="{x:Static local:SampleWindowMenuItemKind.ThemeDaybreakBlue}" />
+                <atom:MenuItem ToggleType="Radio"
+                               GroupName="ThemeColor"
+                               IsChecked="{Binding IsPolarGreenTheme, Mode=OneWay}"
+                               Tag="{x:Static local:SampleWindowMenuItemKind.ThemePolarGreen}">
+                    <atom:MenuItem.Header>
+                        <Grid Width="160" ColumnDefinitions="*,Auto">
+                            <TextBlock Text="Polar Green" VerticalAlignment="Center" />
+                            <Border Grid.Column="1"
+                                    Width="12"
+                                    Height="12"
+                                    CornerRadius="2"
+                                    Background="#52C41A"
+                                    Margin="12 0 0 0" />
+                        </Grid>
+                    </atom:MenuItem.Header>
+                </atom:MenuItem>
+                <atom:MenuItem ToggleType="Radio"
+                               GroupName="ThemeColor"
+                               IsChecked="{Binding IsSunsetOrangeTheme, Mode=OneWay}"
+                               Tag="{x:Static local:SampleWindowMenuItemKind.ThemeSunsetOrange}">
+                    <atom:MenuItem.Header>
+                        <Grid Width="160" ColumnDefinitions="*,Auto">
+                            <TextBlock Text="Sunset Orange" VerticalAlignment="Center" />
+                            <Border Grid.Column="1"
+                                    Width="12"
+                                    Height="12"
+                                    CornerRadius="2"
+                                    Background="#FA8C16"
+                                    Margin="12 0 0 0" />
+                        </Grid>
+                    </atom:MenuItem.Header>
+                </atom:MenuItem>
+                <atom:MenuItem ToggleType="Radio"
+                               GroupName="ThemeColor"
+                               IsChecked="{Binding IsGoldenPurpleTheme, Mode=OneWay}"
+                               Tag="{x:Static local:SampleWindowMenuItemKind.ThemeGoldenPurple}">
+                    <atom:MenuItem.Header>
+                        <Grid Width="160" ColumnDefinitions="*,Auto">
+                            <TextBlock Text="Golden Purple" VerticalAlignment="Center" />
+                            <Border Grid.Column="1"
+                                    Width="12"
+                                    Height="12"
+                                    CornerRadius="2"
+                                    Background="#722ED1"
+                                    Margin="12 0 0 0" />
+                        </Grid>
+                    </atom:MenuItem.Header>
+                </atom:MenuItem>
+                <atom:MenuItem ToggleType="Radio"
+                               GroupName="ThemeColor"
+                               IsChecked="{Binding IsMagentaTheme, Mode=OneWay}"
+                               Tag="{x:Static local:SampleWindowMenuItemKind.ThemeMagenta}">
+                    <atom:MenuItem.Header>
+                        <Grid Width="160" ColumnDefinitions="*,Auto">
+                            <TextBlock Text="Magenta" VerticalAlignment="Center" />
+                            <Border Grid.Column="1"
+                                    Width="12"
+                                    Height="12"
+                                    CornerRadius="2"
+                                    Background="#EB2F96"
+                                    Margin="12 0 0 0" />
+                        </Grid>
+                    </atom:MenuItem.Header>
+                </atom:MenuItem>
+                <atom:MenuSeparator />
+                <atom:MenuItem Header="{Binding AppearanceLabel}">
+                    <atom:MenuItem Header="{Binding LightModeLabel}"
+                                   ToggleType="Radio"
+                                   GroupName="ThemeAppearance"
+                                   IsChecked="{Binding IsLightAppearanceMode, Mode=OneWay}"
+                                   Tag="{x:Static local:SampleWindowMenuItemKind.AppearanceLight}" />
+                    <atom:MenuItem Header="{Binding DarkModeLabel}"
+                                   ToggleType="Radio"
+                                   GroupName="ThemeAppearance"
+                                   IsChecked="{Binding IsDarkAppearanceMode, Mode=OneWay}"
+                                   Tag="{x:Static local:SampleWindowMenuItemKind.AppearanceDark}" />
+                    <atom:MenuItem Header="{Binding SystemModeLabel}"
+                                   ToggleType="Radio"
+                                   GroupName="ThemeAppearance"
+                                   IsChecked="{Binding IsSystemAppearanceMode, Mode=OneWay}"
+                                   Tag="{x:Static local:SampleWindowMenuItemKind.AppearanceSystem}" />
+                </atom:MenuItem>
+                <atom:MenuItem Header="{Binding CompactLabel}"
+                               ToggleType="CheckBox"
+                               IsChecked="{Binding IsCompact, Mode=OneWay}"
+                               Tag="{x:Static local:SampleWindowMenuItemKind.Compact}" />
+            </atom:MenuItem>
+            <atom:MenuItem Header="{Binding LanguageLabel}"
+                           Icon="{antdesign:AntDesignIconProvider Kind=GlobalOutlined}">
+                <atom:MenuItem Header="简体中文"
+                               ToggleType="Radio"
+                               GroupName="Language"
+                               IsChecked="{Binding IsZhCN, Mode=OneWay}"
+                               Tag="{x:Static local:SampleWindowMenuItemKind.LanguageZhCN}" />
+                <atom:MenuItem Header="繁體中文"
+                               ToggleType="Radio"
+                               GroupName="Language"
+                               IsChecked="{Binding IsZhTW, Mode=OneWay}"
+                               Tag="{x:Static local:SampleWindowMenuItemKind.LanguageZhTW}" />
+                <atom:MenuItem Header="English"
+                               ToggleType="Radio"
+                               GroupName="Language"
+                               IsChecked="{Binding IsEnUS, Mode=OneWay}"
+                               Tag="{x:Static local:SampleWindowMenuItemKind.LanguageEnUS}" />
+                <atom:MenuItem Header="Português (Brasil)"
+                               ToggleType="Radio"
+                               GroupName="Language"
+                               IsChecked="{Binding IsPtBR, Mode=OneWay}"
+                               Tag="{x:Static local:SampleWindowMenuItemKind.LanguagePtBR}" />
+            </atom:MenuItem>
+        </atom:Menu>
+    </atom:Window.LeftAddOn>
+
+    <Grid>
+        <Border Height="1"
+                VerticalAlignment="Top"
+                Background="{atom:SharedTokenResource ColorBorderSecondary}"
+                IsHitTestVisible="False" />
+
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical"
+                        Spacing="16"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="24">
+                <Image Source="/Assets/atomui-oss.png" Width="300" Margin="0 0 0 20"/>
+
+                <atom:GroupBox HeaderTitle="{Binding ProgressSectionTitle}"
+                               HorizontalAlignment="Center"
+                               Padding="20">
+                    <StackPanel Spacing="14" HorizontalAlignment="Center">
+                        <atom:ProgressBar Value="{Binding ProgressValue}"
+                                          Minimum="0"
+                                          Maximum="100"
+                                          HorizontalAlignment="Center"
+                                          Width="400"/>
+                        <atom:CircleProgress Value="{Binding ProgressValue}"
+                                             Minimum="0"
+                                             Maximum="100"
+                                             HorizontalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+                            <atom:Button Click="HandleSubBtnClicked"
+                                         Content="{Binding SubButtonText}" />
+                            <atom:Button Click="HandleAddBtnClicked"
+                                         Content="{Binding AddButtonText}" />
+                        </StackPanel>
+                    </StackPanel>
+                </atom:GroupBox>
+
+                <TextBlock Text="{Binding StatusText}"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           MaxWidth="640"/>
+
+                <atom:GroupBox HeaderTitle="{Binding IconsSectionTitle}"
+                               HorizontalAlignment="Center"
+                               Padding="20">
+                    <StackPanel Spacing="10" Orientation="Horizontal">
+                        <antdesign:WechatFilled Width="32" Height="32"/>
+                        <material:DeviceBluetoothSearchingFilled Width="32" Height="32"/>
+                        <iconpark:Cpu IconTheme="Filled" Width="32" Height="32"/>
+                        <atom:Button Icon="{material:MaterialIconProvider AvRepeatOneOnFilled}"
+                                     Content="{Binding IconButtonText}" />
+                        <atom:Button Content="{Binding IconButtonText}">
+                            <atom:Button.Icon>
+                                <iconpark:Cpu/>
+                            </atom:Button.Icon>
+                        </atom:Button>
+                    </StackPanel>
+                </atom:GroupBox>
             </StackPanel>
-            
-            <atom:GroupBox HeaderTitle="Icons" HorizontalAlignment="Center" Padding="20">
-                <StackPanel Spacing="10" Orientation="Horizontal">
-                    <antdesign:WechatFilled Width="32" Height="32"/>
-                    <material:DeviceBluetoothSearchingFilled Width="32" Height="32"/>
-                    <iconpark:Cpu IconTheme="Filled" Width="32" Height="32"/>
-                </StackPanel>
-            </atom:GroupBox>
-        </StackPanel>
-    </Panel>
+        </ScrollViewer>
+    </Grid>
 </atom:Window>
