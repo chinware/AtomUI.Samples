@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net9.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -13,10 +13,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AtomUI.Desktop.Controls" Version="5.1.2"/>
-        <PackageReference Include="AtomUI.Icons.Material" Version="5.0.0"/>
-        <PackageReference Include="AtomUI.Icons.IconPark" Version="1.0.0"/>
-        <PackageReference Include="Avalonia.Diagnostics" Version="11.3.9">
+        <PackageReference Include="AtomUI.Desktop.Controls" Version="6.1.3"/>
+        <PackageReference Include="AtomUI.Icons.Material" Version="6.1.1"/>
+        <PackageReference Include="AtomUI.Icons.IconPark" Version="6.1.1"/>
+        <PackageReference Include="Avalonia.Diagnostics" Version="11.3.10">
             <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
